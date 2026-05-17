@@ -1,0 +1,26 @@
+{
+  "name": "black-wolf-digital",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Full-stack website for Black Wolf Digital using Next.js, Node.js, Express, Prisma, and MySQL.",
+  "scripts": {
+    "dev": "concurrently \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "build": "npm run build --prefix backend && npm run build --prefix frontend",
+    "start:backend": "npm run start --prefix backend",
+    "start:frontend": "npm run start --prefix frontend",
+    "seed": "npm run seed --prefix backend"
+  },
+  "keywords": [
+    "black-wolf-digital",
+    "nextjs",
+    "nodejs",
+    "express",
+    "prisma",
+    "mysql"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}
