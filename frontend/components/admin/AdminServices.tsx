@@ -28,8 +28,23 @@ export default function AdminServices() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const getToken = () => localStorage.getItem("black_wolf_token");
+
+  const showSuccess = (message: string) => {
+    setSuccessMessage(message);
+    setErrorMessage("");
+
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 3000);
+  };
+
+  const showError = (message: string) => {
+    setErrorMessage(message);
+    setSuccessMessage("");
+  };
 
   const fetchServices = async () => {
     const token = getToken();
@@ -150,16 +165,19 @@ export default function AdminServices() {
     }
   };
 
-  const deleteService = async (id: number) => {
+  const deleteService = async (id: number, title: string) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this service?",
+      `Are you sure you want to delete "${title}"? This action cannot be undone.`,
     );
 
     if (!confirmDelete) return;
 
-    const token = getToken();
+    const token = localStorage.getItem("black_wolf_token");
 
-    if (!token) return;
+    if (!token) {
+      alert("Token missing");
+      return;
+    }
 
     try {
       const response = await fetch(`${API_URL}/services/${id}`, {
@@ -169,8 +187,10 @@ export default function AdminServices() {
         },
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to delete service");
+        throw new Error(data.message || "Failed to delete service");
       }
 
       setServices((prev) => prev.filter((service) => service.id !== id));
@@ -355,7 +375,7 @@ export default function AdminServices() {
                     </button>
 
                     <button
-                      onClick={() => deleteService(service.id)}
+                      onClick={() => deleteService(service.id, service.title)}
                       className="rounded-lg border border-red-400/30 px-4 py-2 text-sm font-semibold text-red-300 transition hover:bg-red-400/10"
                     >
                       Delete

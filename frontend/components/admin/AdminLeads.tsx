@@ -15,8 +15,23 @@ export default function AdminLeads() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   const getToken = () => localStorage.getItem("black_wolf_token");
+
+  const showSuccess = (message: string) => {
+    setSuccessMessage(message);
+    setErrorMessage("");
+
+    setTimeout(() => {
+      setSuccessMessage("");
+    }, 3000);
+  };
+
+  const showError = (message: string) => {
+    setErrorMessage(message);
+    setSuccessMessage("");
+  };
 
   const fetchLeads = async () => {
     const token = getToken();
@@ -77,16 +92,19 @@ export default function AdminLeads() {
     }
   };
 
-  const deleteLead = async (id: number) => {
+  const deleteLead = async (id: number, name: string) => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this lead?",
+      `Are you sure you want to delete lead from "${name}"? This action cannot be undone.`,
     );
 
     if (!confirmDelete) return;
 
     const token = getToken();
 
-    if (!token) return;
+    if (!token) {
+      alert("Token missing");
+      return;
+    }
 
     try {
       const response = await fetch(`${API_URL}/leads/${id}`, {
@@ -96,8 +114,10 @@ export default function AdminLeads() {
         },
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error("Failed to delete lead");
+        throw new Error(data.message || "Failed to delete lead");
       }
 
       setLeads((prev) => prev.filter((lead) => lead.id !== id));
@@ -204,7 +224,7 @@ export default function AdminLeads() {
 
                 <td className="px-5 py-4">
                   <button
-                    onClick={() => deleteLead(lead.id)}
+                    onClick={() => deleteLead(lead.id, lead.name)}
                     className="rounded-lg border border-red-400/30 px-3 py-2 text-xs font-semibold text-red-300 transition hover:bg-red-400/10"
                   >
                     Delete
