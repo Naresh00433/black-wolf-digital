@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { API_URL } from "@/lib/api";
 import { Service } from "@/types/service";
 
@@ -46,11 +46,11 @@ export default function AdminServices() {
     setSuccessMessage("");
   };
 
-  const fetchServices = async () => {
+  const fetchServices = useCallback(async () => {
     const token = getToken();
 
     if (!token) {
-      setErrorMessage("Token missing");
+      showError("Token missing");
       setLoading(false);
       return;
     }
@@ -70,17 +70,17 @@ export default function AdminServices() {
 
       setServices(data.services);
     } catch (error) {
-      setErrorMessage(
+      showError(
         error instanceof Error ? error.message : "Something went wrong",
       );
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     fetchServices();
-  }, []);
+  }, [fetchServices]);
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -100,6 +100,7 @@ export default function AdminServices() {
 
   const handleEdit = (service: Service) => {
     setEditingId(service.id);
+
     setFormData({
       title: service.title || "",
       shortDescription: service.shortDescription || "",
@@ -123,23 +124,25 @@ export default function AdminServices() {
     const token = getToken();
 
     if (!token) {
-      alert("Token missing");
+      showError("Token missing");
       return;
     }
 
     if (!formData.title || !formData.content) {
-      alert("Title and content are required");
+      showError("Title and content are required");
       return;
     }
 
     setSaving(true);
 
     try {
-      const url = editingId
+      const isEditing = Boolean(editingId);
+
+      const url = isEditing
         ? `${API_URL}/services/${editingId}`
         : `${API_URL}/services`;
 
-      const method = editingId ? "PUT" : "POST";
+      const method = isEditing ? "PUT" : "POST";
 
       const response = await fetch(url, {
         method,
@@ -157,9 +160,18 @@ export default function AdminServices() {
       }
 
       await fetchServices();
+
+      showSuccess(
+        isEditing
+          ? "Service updated successfully."
+          : "Service created successfully.",
+      );
+
       resetForm();
     } catch (error) {
-      alert(error instanceof Error ? error.message : "Something went wrong");
+      showError(
+        error instanceof Error ? error.message : "Something went wrong",
+      );
     } finally {
       setSaving(false);
     }
@@ -172,10 +184,10 @@ export default function AdminServices() {
 
     if (!confirmDelete) return;
 
-    const token = localStorage.getItem("black_wolf_token");
+    const token = getToken();
 
     if (!token) {
-      alert("Token missing");
+      showError("Token missing");
       return;
     }
 
@@ -194,198 +206,219 @@ export default function AdminServices() {
       }
 
       setServices((prev) => prev.filter((service) => service.id !== id));
+      showSuccess("Service deleted successfully.");
     } catch (error) {
-      alert(error instanceof Error ? error.message : "Something went wrong");
+      showError(
+        error instanceof Error ? error.message : "Something went wrong",
+      );
     }
   };
 
   return (
-    <div className="grid gap-8 xl:grid-cols-[420px_1fr]">
-      <form
-        onSubmit={handleSubmit}
-        className="h-fit rounded-2xl border border-white/10 bg-white/5 p-6"
-      >
-        <h2 className="mb-5 text-xl font-bold">
-          {editingId ? "Edit Service" : "Add Service"}
-        </h2>
+    <div className="space-y-5">
+      {successMessage && (
+        <div className="rounded-2xl border border-green-400/30 bg-green-400/10 px-5 py-4 text-sm font-medium text-green-300">
+          {successMessage}
+        </div>
+      )}
 
-        <div className="space-y-4">
-          <div>
-            <label className="mb-2 block text-sm text-gray-300">Title *</label>
-            <input
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
-              placeholder="Affiliate Marketing"
-            />
-          </div>
+      {errorMessage && !loading && (
+        <div className="rounded-2xl border border-red-400/30 bg-red-400/10 px-5 py-4 text-sm font-medium text-red-300">
+          {errorMessage}
+        </div>
+      )}
 
-          <div>
-            <label className="mb-2 block text-sm text-gray-300">
-              Short Description
-            </label>
-            <textarea
-              name="shortDescription"
-              value={formData.shortDescription}
-              onChange={handleChange}
-              rows={3}
-              className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
-              placeholder="Short summary"
-            />
-          </div>
+      <div className="grid gap-8 xl:grid-cols-[420px_1fr]">
+        <form
+          onSubmit={handleSubmit}
+          className="h-fit rounded-2xl border border-white/10 bg-white/5 p-6"
+        >
+          <h2 className="mb-5 text-xl font-bold">
+            {editingId ? "Edit Service" : "Add Service"}
+          </h2>
 
-          <div>
-            <label className="mb-2 block text-sm text-gray-300">
-              Content *
-            </label>
-            <textarea
-              name="content"
-              value={formData.content}
-              onChange={handleChange}
-              rows={6}
-              className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
-              placeholder="Full service content"
-            />
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-1">
+          <div className="space-y-4">
             <div>
-              <label className="mb-2 block text-sm text-gray-300">Icon</label>
+              <label className="mb-2 block text-sm text-gray-300">
+                Title *
+              </label>
               <input
-                name="icon"
-                value={formData.icon}
+                name="title"
+                value={formData.title}
                 onChange={handleChange}
                 className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
-                placeholder="search / link / ads"
+                placeholder="Affiliate Marketing"
               />
             </div>
 
             <div>
-              <label className="mb-2 block text-sm text-gray-300">Status</label>
-              <select
-                name="status"
-                value={formData.status}
+              <label className="mb-2 block text-sm text-gray-300">
+                Short Description
+              </label>
+              <textarea
+                name="shortDescription"
+                value={formData.shortDescription}
+                onChange={handleChange}
+                rows={3}
+                className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
+                placeholder="Short summary"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm text-gray-300">
+                Content *
+              </label>
+              <textarea
+                name="content"
+                value={formData.content}
+                onChange={handleChange}
+                rows={6}
+                className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
+                placeholder="Full service content"
+              />
+            </div>
+
+            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-1">
+              <div>
+                <label className="mb-2 block text-sm text-gray-300">Icon</label>
+                <input
+                  name="icon"
+                  value={formData.icon}
+                  onChange={handleChange}
+                  className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
+                  placeholder="search / link / ads"
+                />
+              </div>
+
+              <div>
+                <label className="mb-2 block text-sm text-gray-300">
+                  Status
+                </label>
+                <select
+                  name="status"
+                  value={formData.status}
+                  onChange={handleChange}
+                  className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
+                >
+                  <option value="active">active</option>
+                  <option value="inactive">inactive</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm text-gray-300">
+                Meta Title
+              </label>
+              <input
+                name="metaTitle"
+                value={formData.metaTitle}
                 onChange={handleChange}
                 className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
-              >
-                <option value="active">active</option>
-                <option value="inactive">inactive</option>
-              </select>
+                placeholder="SEO title"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm text-gray-300">
+                Meta Description
+              </label>
+              <textarea
+                name="metaDescription"
+                value={formData.metaDescription}
+                onChange={handleChange}
+                rows={3}
+                className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
+                placeholder="SEO description"
+              />
             </div>
           </div>
 
-          <div>
-            <label className="mb-2 block text-sm text-gray-300">
-              Meta Title
-            </label>
-            <input
-              name="metaTitle"
-              value={formData.metaTitle}
-              onChange={handleChange}
-              className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
-              placeholder="SEO title"
-            />
-          </div>
-
-          <div>
-            <label className="mb-2 block text-sm text-gray-300">
-              Meta Description
-            </label>
-            <textarea
-              name="metaDescription"
-              value={formData.metaDescription}
-              onChange={handleChange}
-              rows={3}
-              className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
-              placeholder="SEO description"
-            />
-          </div>
-        </div>
-
-        <div className="mt-6 flex gap-3">
-          <button
-            type="submit"
-            disabled={saving}
-            className="rounded-full bg-cyan-400 px-6 py-3 font-semibold text-black transition hover:bg-cyan-300 disabled:opacity-60"
-          >
-            {saving
-              ? "Saving..."
-              : editingId
-                ? "Update Service"
-                : "Create Service"}
-          </button>
-
-          {editingId && (
+          <div className="mt-6 flex gap-3">
             <button
-              type="button"
-              onClick={resetForm}
-              className="rounded-full border border-white/10 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
+              type="submit"
+              disabled={saving}
+              className="rounded-full bg-cyan-400 px-6 py-3 font-semibold text-black transition hover:bg-cyan-300 disabled:opacity-60"
             >
-              Cancel
+              {saving
+                ? "Saving..."
+                : editingId
+                  ? "Update Service"
+                  : "Create Service"}
             </button>
-          )}
-        </div>
-      </form>
 
-      <div>
-        {loading ? (
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-gray-400">
-            Loading services...
-          </div>
-        ) : errorMessage ? (
-          <div className="rounded-2xl border border-red-400/30 bg-red-400/10 p-6 text-red-300">
-            {errorMessage}
-          </div>
-        ) : services.length === 0 ? (
-          <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-gray-400">
-            No services found.
-          </div>
-        ) : (
-          <div className="grid gap-4">
-            {services.map((service) => (
-              <div
-                key={service.id}
-                className="rounded-2xl border border-white/10 bg-white/5 p-5"
+            {editingId && (
+              <button
+                type="button"
+                onClick={resetForm}
+                className="rounded-full border border-white/10 px-6 py-3 font-semibold text-white transition hover:bg-white/10"
               >
-                <div className="flex flex-col justify-between gap-4 md:flex-row">
-                  <div>
-                    <div className="mb-2 flex flex-wrap items-center gap-3">
-                      <h3 className="text-xl font-bold">{service.title}</h3>
-                      <span className="rounded-full border border-cyan-400/30 px-3 py-1 text-xs text-cyan-300">
-                        {service.status}
-                      </span>
+                Cancel
+              </button>
+            )}
+          </div>
+        </form>
+
+        <div>
+          {loading ? (
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-gray-400">
+              Loading services...
+            </div>
+          ) : errorMessage && services.length === 0 ? (
+            <div className="rounded-2xl border border-red-400/30 bg-red-400/10 p-6 text-red-300">
+              {errorMessage}
+            </div>
+          ) : services.length === 0 ? (
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-gray-400">
+              No services found.
+            </div>
+          ) : (
+            <div className="grid gap-4">
+              {services.map((service) => (
+                <div
+                  key={service.id}
+                  className="rounded-2xl border border-white/10 bg-white/5 p-5"
+                >
+                  <div className="flex flex-col justify-between gap-4 md:flex-row">
+                    <div>
+                      <div className="mb-2 flex flex-wrap items-center gap-3">
+                        <h3 className="text-xl font-bold">{service.title}</h3>
+                        <span className="rounded-full border border-cyan-400/30 px-3 py-1 text-xs text-cyan-300">
+                          {service.status}
+                        </span>
+                      </div>
+
+                      <p className="text-sm text-gray-400">
+                        /services/{service.slug}
+                      </p>
+
+                      <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-300">
+                        {service.shortDescription || "No short description"}
+                      </p>
                     </div>
 
-                    <p className="text-sm text-gray-400">
-                      /services/{service.slug}
-                    </p>
+                    <div className="flex h-fit gap-2">
+                      <button
+                        onClick={() => handleEdit(service)}
+                        className="rounded-lg border border-cyan-400/30 px-4 py-2 text-sm font-semibold text-cyan-300 transition hover:bg-cyan-400/10"
+                      >
+                        Edit
+                      </button>
 
-                    <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-300">
-                      {service.shortDescription || "No short description"}
-                    </p>
-                  </div>
-
-                  <div className="flex h-fit gap-2">
-                    <button
-                      onClick={() => handleEdit(service)}
-                      className="rounded-lg border border-cyan-400/30 px-4 py-2 text-sm font-semibold text-cyan-300 transition hover:bg-cyan-400/10"
-                    >
-                      Edit
-                    </button>
-
-                    <button
-                      onClick={() => deleteService(service.id, service.title)}
-                      className="rounded-lg border border-red-400/30 px-4 py-2 text-sm font-semibold text-red-300 transition hover:bg-red-400/10"
-                    >
-                      Delete
-                    </button>
+                      <button
+                        onClick={() => deleteService(service.id, service.title)}
+                        className="rounded-lg border border-red-400/30 px-4 py-2 text-sm font-semibold text-red-300 transition hover:bg-red-400/10"
+                      >
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        )}
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
