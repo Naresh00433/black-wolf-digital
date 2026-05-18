@@ -30,6 +30,8 @@ export default function AdminBlogs() {
   const [saving, setSaving] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   const getToken = () => localStorage.getItem("black_wolf_token");
 
@@ -218,6 +220,27 @@ export default function AdminBlogs() {
     }
   };
 
+  const filteredBlogs = blogs.filter((blog) => {
+    const searchValue = searchTerm.toLowerCase().trim();
+
+    const matchesSearch =
+      searchValue === "" ||
+      blog.title.toLowerCase().includes(searchValue) ||
+      blog.slug.toLowerCase().includes(searchValue) ||
+      (blog.category || "").toLowerCase().includes(searchValue) ||
+      (blog.shortDescription || "").toLowerCase().includes(searchValue);
+
+    const matchesStatus =
+      statusFilter === "all" || blog.status === statusFilter;
+
+    return matchesSearch && matchesStatus;
+  });
+
+  const clearFilters = () => {
+    setSearchTerm("");
+    setStatusFilter("all");
+  };
+
   return (
     <div className="space-y-5">
       {successMessage && (
@@ -384,7 +407,40 @@ export default function AdminBlogs() {
           </div>
         </form>
 
-        <div>
+        <div className="space-y-4">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="grid gap-3 md:grid-cols-[1fr_180px_auto]">
+              <input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-sm text-white outline-none focus:border-cyan-400"
+                placeholder="Search blogs by title, slug, category..."
+              />
+
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="rounded-xl border border-white/10 bg-black px-4 py-3 text-sm text-white outline-none focus:border-cyan-400"
+              >
+                <option value="all">All status</option>
+                <option value="draft">Draft</option>
+                <option value="published">Published</option>
+              </select>
+
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="rounded-xl border border-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                Clear
+              </button>
+            </div>
+
+            <p className="mt-3 text-xs text-gray-500">
+              Showing {filteredBlogs.length} of {blogs.length} blogs
+            </p>
+          </div>
+
           {loading ? (
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-gray-400">
               Loading blogs...
@@ -397,9 +453,13 @@ export default function AdminBlogs() {
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-gray-400">
               No blogs found.
             </div>
+          ) : filteredBlogs.length === 0 ? (
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-gray-400">
+              No blogs match your search/filter.
+            </div>
           ) : (
             <div className="grid gap-4">
-              {blogs.map((blog) => (
+              {filteredBlogs.map((blog) => (
                 <div
                   key={blog.id}
                   className="rounded-2xl border border-white/10 bg-white/5 p-5"

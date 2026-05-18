@@ -29,6 +29,8 @@ export default function AdminServices() {
   const [saving, setSaving] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   const getToken = () => localStorage.getItem("black_wolf_token");
 
@@ -214,6 +216,27 @@ export default function AdminServices() {
     }
   };
 
+  const filteredServices = services.filter((service) => {
+    const searchValue = searchTerm.toLowerCase().trim();
+
+    const matchesSearch =
+      searchValue === "" ||
+      service.title.toLowerCase().includes(searchValue) ||
+      service.slug.toLowerCase().includes(searchValue) ||
+      (service.shortDescription || "").toLowerCase().includes(searchValue) ||
+      (service.icon || "").toLowerCase().includes(searchValue);
+
+    const matchesStatus =
+      statusFilter === "all" || service.status === statusFilter;
+
+    return matchesSearch && matchesStatus;
+  });
+
+  const clearFilters = () => {
+    setSearchTerm("");
+    setStatusFilter("all");
+  };
+
   return (
     <div className="space-y-5">
       {successMessage && (
@@ -360,7 +383,40 @@ export default function AdminServices() {
           </div>
         </form>
 
-        <div>
+        <div className="space-y-4">
+          <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+            <div className="grid gap-3 md:grid-cols-[1fr_180px_auto]">
+              <input
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-sm text-white outline-none focus:border-cyan-400"
+                placeholder="Search services by title, slug, icon..."
+              />
+
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="rounded-xl border border-white/10 bg-black px-4 py-3 text-sm text-white outline-none focus:border-cyan-400"
+              >
+                <option value="all">All status</option>
+                <option value="active">Active</option>
+                <option value="inactive">Inactive</option>
+              </select>
+
+              <button
+                type="button"
+                onClick={clearFilters}
+                className="rounded-xl border border-white/10 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                Clear
+              </button>
+            </div>
+
+            <p className="mt-3 text-xs text-gray-500">
+              Showing {filteredServices.length} of {services.length} services
+            </p>
+          </div>
+
           {loading ? (
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-gray-400">
               Loading services...
@@ -373,9 +429,13 @@ export default function AdminServices() {
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-gray-400">
               No services found.
             </div>
+          ) : filteredServices.length === 0 ? (
+            <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-gray-400">
+              No services match your search/filter.
+            </div>
           ) : (
             <div className="grid gap-4">
-              {services.map((service) => (
+              {filteredServices.map((service) => (
                 <div
                   key={service.id}
                   className="rounded-2xl border border-white/10 bg-white/5 p-5"
