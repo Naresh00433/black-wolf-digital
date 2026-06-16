@@ -9,6 +9,12 @@ interface BlogsResponse {
   blogs: Blog[];
 }
 
+interface UploadResponse {
+  success: boolean;
+  message: string;
+  imageUrl: string;
+}
+
 const emptyForm = {
   title: "",
   shortDescription: "",
@@ -28,6 +34,7 @@ export default function AdminBlogs() {
 
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [uploadingImage, setUploadingImage] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
@@ -98,6 +105,73 @@ export default function AdminBlogs() {
       ...formData,
       [e.target.name]: e.target.value,
     });
+  };
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    if (!file) return;
+
+    const token = getToken();
+
+    if (!token) {
+      showError("Token missing");
+      return;
+    }
+
+    const allowedTypes = ["image/jpeg", "image/png", "image/webp", "image/jpg"];
+
+    if (!allowedTypes.includes(file.type)) {
+      showError("Only JPG, PNG, and WEBP images are allowed");
+      return;
+    }
+
+    if (file.size > 2 * 1024 * 1024) {
+      showError("Image size must be less than 2MB");
+      return;
+    }
+
+    const uploadData = new FormData();
+    uploadData.append("image", file);
+
+    setUploadingImage(true);
+
+    try {
+      const response = await fetch(`${API_URL}/upload/image`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: uploadData,
+      });
+
+      const data: UploadResponse = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to upload image");
+      }
+
+      setFormData((prev) => ({
+        ...prev,
+        featuredImage: data.imageUrl,
+      }));
+
+      showSuccess("Image uploaded successfully.");
+    } catch (error) {
+      showError(
+        error instanceof Error ? error.message : "Something went wrong",
+      );
+    } finally {
+      setUploadingImage(false);
+      e.target.value = "";
+    }
+  };
+
+  const removeFeaturedImage = () => {
+    setFormData((prev) => ({
+      ...prev,
+      featuredImage: "",
+    }));
   };
 
   const resetForm = () => {
@@ -334,15 +408,48 @@ export default function AdminBlogs() {
 
             <div>
               <label className="mb-2 block text-sm text-gray-300">
-                Featured Image URL
+                Featured Image
               </label>
-              <input
-                name="featuredImage"
-                value={formData.featuredImage}
-                onChange={handleChange}
-                className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
-                placeholder="https://example.com/image.jpg"
-              />
+
+              <div className="space-y-3 rounded-xl border border-white/10 bg-black p-4">
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/jpg"
+                  onChange={handleImageUpload}
+                  disabled={uploadingImage}
+                  className="block w-full text-sm text-gray-300 file:mr-4 file:rounded-full file:border-0 file:bg-cyan-400 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-black hover:file:bg-cyan-300 disabled:opacity-60"
+                />
+
+                {uploadingImage && (
+                  <p className="text-xs text-cyan-300">Uploading image...</p>
+                )}
+
+                <input
+                  name="featuredImage"
+                  value={formData.featuredImage}
+                  onChange={handleChange}
+                  className="w-full rounded-xl border border-white/10 bg-black px-4 py-3 text-white outline-none focus:border-cyan-400"
+                  placeholder="Or paste image URL manually"
+                />
+
+                {formData.featuredImage && (
+                  <div className="space-y-3">
+                    <img
+                      src={formData.featuredImage}
+                      alt="Featured preview"
+                      className="h-44 w-full rounded-xl border border-white/10 object-cover"
+                    />
+
+                    <button
+                      type="button"
+                      onClick={removeFeaturedImage}
+                      className="rounded-full border border-red-400/30 px-4 py-2 text-xs font-semibold text-red-300 transition hover:bg-red-400/10"
+                    >
+                      Remove image
+                    </button>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div>
@@ -389,7 +496,7 @@ export default function AdminBlogs() {
           <div className="mt-6 flex gap-3">
             <button
               type="submit"
-              disabled={saving}
+              disabled={saving || uploadingImage}
               className="rounded-full bg-cyan-400 px-6 py-3 font-semibold text-black transition hover:bg-cyan-300 disabled:opacity-60"
             >
               {saving ? "Saving..." : editingId ? "Update Blog" : "Create Blog"}
@@ -489,6 +596,14 @@ export default function AdminBlogs() {
                       <p className="mt-3 max-w-2xl text-sm leading-6 text-gray-300">
                         {blog.shortDescription || "No short description"}
                       </p>
+
+                      {blog.featuredImage && (
+                        <img
+                          src={blog.featuredImage}
+                          alt={blog.title}
+                          className="mt-4 h-32 w-full max-w-md rounded-xl border border-white/10 object-cover"
+                        />
+                      )}
 
                       <p className="mt-3 text-xs text-gray-500">
                         Created:{" "}

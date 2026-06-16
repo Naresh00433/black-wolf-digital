@@ -1,0 +1,550 @@
+{
+  "info": {
+    "_postman_id": "473fb247-6915-4969-acd7-95d543e8ec10",
+    "name": "Black Wolf Digital",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "50533557",
+    "_collection_link": "https://go.postman.co/collection/50533557-473fb247-6915-4969-acd7-95d543e8ec10?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "health api",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/health",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "health"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "database admin check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/db-check",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "db-check"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "auth login token",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"email\": \"admin@blackwolfdigital.com\",\r\n  \"password\": \"Admin@123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/login",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "auth",
+            "login"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "user info",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBibGFja3dvbGZkaWdpdGFsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3OTM1NzM0MCwiZXhwIjoxNzc5OTYyMTQwfQ.XzUglnicszKS9ANn1yNpKw5mwbOase49nGOT7OjNTLw",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/auth/me",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "auth",
+            "me"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "blog create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBibGFja3dvbGZkaWdpdGFsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3OTM1NzM0MCwiZXhwIjoxNzc5OTYyMTQwfQ.XzUglnicszKS9ANn1yNpKw5mwbOase49nGOT7OjNTLw",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"What Is Affiliate Marketing?\",\r\n  \"shortDescription\": \"A beginner-friendly guide to understanding affiliate marketing.\",\r\n  \"content\": \"Affiliate marketing is a performance-based marketing model where businesses reward partners for bringing traffic, leads, or sales.\",\r\n  \"featuredImage\": \"\",\r\n  \"category\": \"Affiliate Marketing\",\r\n  \"tags\": \"affiliate marketing,digital marketing,growth\",\r\n  \"metaTitle\": \"What Is Affiliate Marketing? | Black Wolf Digital\",\r\n  \"metaDescription\": \"Learn what affiliate marketing is and how it helps businesses grow.\",\r\n  \"status\": \"published\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/blogs",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "blogs"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "blogs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/blogs",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "blogs"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "blog admin",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBibGFja3dvbGZkaWdpdGFsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3OTM1NzM0MCwiZXhwIjoxNzc5OTYyMTQwfQ.XzUglnicszKS9ANn1yNpKw5mwbOase49nGOT7OjNTLw",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/blogs/admin",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "blogs",
+            "admin"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "single blog",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/blogs/what-is-affiliate-marketing",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "blogs",
+            "what-is-affiliate-marketing"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "service create",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBibGFja3dvbGZkaWdpdGFsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3OTM1NzM0MCwiZXhwIjoxNzc5OTYyMTQwfQ.XzUglnicszKS9ANn1yNpKw5mwbOase49nGOT7OjNTLw",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"title\": \"Affiliate Marketing\",\r\n  \"shortDescription\": \"Build performance-based partner programs that generate measurable revenue.\",\r\n  \"content\": \"Our affiliate marketing service helps businesses create, manage, and optimize affiliate programs. We focus on partner strategy, commission planning, campaign tracking, landing page optimization, and performance reporting.\",\r\n  \"icon\": \"link\",\r\n  \"image\": \"\",\r\n  \"metaTitle\": \"Affiliate Marketing Services | Black Wolf Digital\",\r\n  \"metaDescription\": \"Grow your business with affiliate marketing strategies, partner programs, tracking, and performance optimization.\",\r\n  \"status\": \"active\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/services",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "services"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "services",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/services",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "services"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "service admin",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBibGFja3dvbGZkaWdpdGFsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3OTM1NzM0MCwiZXhwIjoxNzc5OTYyMTQwfQ.XzUglnicszKS9ANn1yNpKw5mwbOase49nGOT7OjNTLw",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/services/admin",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "services",
+            "admin"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "single service",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:5000/api/services/affiliate-marketing",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "services",
+            "affiliate-marketing"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "lead create",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"name\": \"Test Client\",\r\n  \"email\": \"client@example.com\",\r\n  \"phone\": \"9876543210\",\r\n  \"company\": \"Demo Company\",\r\n  \"service\": \"SEO\",\r\n  \"budget\": \"25000-50000\",\r\n  \"message\": \"I want SEO and digital marketing services.\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/leads",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "leads"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "all leads",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBibGFja3dvbGZkaWdpdGFsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3OTM1NzM0MCwiZXhwIjoxNzc5OTYyMTQwfQ.XzUglnicszKS9ANn1yNpKw5mwbOase49nGOT7OjNTLw",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/leads",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "leads"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "single lead",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBibGFja3dvbGZkaWdpdGFsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3OTM1NzM0MCwiZXhwIjoxNzc5OTYyMTQwfQ.XzUglnicszKS9ANn1yNpKw5mwbOase49nGOT7OjNTLw",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/leads/5",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "leads",
+            "5"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "update lead",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBibGFja3dvbGZkaWdpdGFsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3OTM1NzM0MCwiZXhwIjoxNzc5OTYyMTQwfQ.XzUglnicszKS9ANn1yNpKw5mwbOase49nGOT7OjNTLw",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"status\": \"contacted\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/leads/6/status",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "leads",
+            "6",
+            "status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "lead delete",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBibGFja3dvbGZkaWdpdGFsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3OTM1NzM0MCwiZXhwIjoxNzc5OTYyMTQwfQ.XzUglnicszKS9ANn1yNpKw5mwbOase49nGOT7OjNTLw",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/leads/6",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "leads",
+            "6"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Dashboard stats",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBibGFja3dvbGZkaWdpdGFsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3OTM1NzM0MCwiZXhwIjoxNzc5OTYyMTQwfQ.XzUglnicszKS9ANn1yNpKw5mwbOase49nGOT7OjNTLw",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "http://localhost:5000/api/dashboard/stats",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "dashboard",
+            "stats"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "upload image",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJhZG1pbkBibGFja3dvbGZkaWdpdGFsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc3OTM1NzM0MCwiZXhwIjoxNzc5OTYyMTQwfQ.XzUglnicszKS9ANn1yNpKw5mwbOase49nGOT7OjNTLw",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "uuid": "df49979f-ef06-4ccf-a53c-4c621c63138f",
+              "src": "3ybPIDCO8/how-to-port-health-insurance-in-india.webp"
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/upload/image",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "5000",
+          "path": [
+            "api",
+            "upload",
+            "image"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

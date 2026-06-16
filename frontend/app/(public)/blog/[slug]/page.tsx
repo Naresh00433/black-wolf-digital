@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { apiFetch } from "@/lib/api";
@@ -99,12 +98,10 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           <div className="mx-auto max-w-6xl">
             <div className="relative h-[320px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 md:h-[480px]">
               {blog.featuredImage ? (
-                <Image
+                <img
                   src={blog.featuredImage}
                   alt={blog.title}
-                  fill
-                  priority
-                  className="object-cover"
+                  className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                 />
               ) : (
                 <div className="flex h-full items-center justify-center">

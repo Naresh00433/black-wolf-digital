@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { Blog } from "@/types/blog";
@@ -57,11 +56,10 @@ export default async function BlogPage() {
                 >
                   <div className="relative h-56 overflow-hidden bg-gradient-to-br from-cyan-400/20 to-purple-500/20">
                     {blog.featuredImage ? (
-                      <Image
+                      <img
                         src={blog.featuredImage}
                         alt={blog.title}
-                        fill
-                        className="object-cover transition duration-500 group-hover:scale-105"
+                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                       />
                     ) : (
                       <div className="flex h-full items-center justify-center">
