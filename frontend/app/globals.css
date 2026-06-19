@@ -23,3 +23,23 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+.section {
+  @apply px-6 py-24;
+}
+
+.container-custom {
+  @apply mx-auto max-w-7xl;
+}
+
+.section-badge {
+  @apply mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400;
+}
+
+.section-title {
+  @apply text-4xl font-bold md:text-5xl;
+}
+
+.card-dark {
+  @apply rounded-2xl border border-white/10 bg-white/5;
+}

@@ -8,7 +8,7 @@ export default function AdminLoginForm() {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    email: "admin@blackwolfdigital.com",
+    email: "admin@blackwolfdigital.in",
     password: "Admin@123",
   });
 

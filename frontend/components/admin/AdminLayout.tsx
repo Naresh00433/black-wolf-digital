@@ -6,19 +6,13 @@ import { usePathname, useRouter } from "next/navigation";
 import { ReactNode, useEffect, useState } from "react";
 import { API_URL } from "@/lib/api";
 
-const adminLinks = [
-  { label: "Dashboard", href: "/admin/dashboard" },
-  { label: "Blogs", href: "/admin/blogs" },
-  { label: "Services", href: "/admin/services" },
-  { label: "Leads", href: "/admin/leads" },
-];
-
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
 
   const [checking, setChecking] = useState(true);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [userRole, setUserRole] = useState("");
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -43,6 +37,10 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           return;
         }
 
+        const data = await response.json();
+
+        setUserRole(data.user.role);
+
         setChecking(false);
       } catch {
         localStorage.removeItem("black_wolf_token");
@@ -61,6 +59,34 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   };
 
   const closeMenu = () => setMenuOpen(false);
+
+  const adminLinks = [
+    { label: "Dashboard", href: "/admin/dashboard" },
+
+    { label: "Profile", href: "/admin/profile" },
+
+    ...(userRole === "SUPER_ADMIN" ||
+    userRole === "ADMIN" ||
+    userRole === "EDITOR"
+      ? [{ label: "Blogs", href: "/admin/blogs" }]
+      : []),
+
+    ...(userRole === "SUPER_ADMIN" || userRole === "ADMIN"
+      ? [
+          { label: "Services", href: "/admin/services" },
+          { label: "Leads", href: "/admin/leads" },
+        ]
+      : []),
+
+    ...(userRole === "SUPER_ADMIN"
+      ? [{ label: "Users", href: "/admin/users" }]
+      : []),
+
+    {
+      label: "Change Password",
+      href: "/admin/change-password",
+    },
+  ];
 
   if (checking) {
     return (
@@ -87,6 +113,13 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               priority
             />
           </Link>
+          <div className="mt-6 rounded-2xl border border-white/10 bg-white/5 p-3 text-center">
+            <p className="text-xs uppercase tracking-wider text-gray-400">
+              Logged In As
+            </p>
+
+            <p className="mt-2 font-semibold text-cyan-400">{userRole}</p>
+          </div>
 
           <nav className="mt-10 flex flex-col gap-2">
             {adminLinks.map((link) => {

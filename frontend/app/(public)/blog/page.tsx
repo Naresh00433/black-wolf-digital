@@ -39,7 +39,7 @@ export default async function BlogPage() {
       </section>
 
       <section className="px-6 py-20">
-        <div className="mx-auto max-w-7xl">
+        <div className="container-custom">
           {data.blogs.length === 0 ? (
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
               <p className="text-gray-400">
@@ -105,7 +105,7 @@ export default async function BlogPage() {
         </div>
       </section>
 
-      <section className="px-6 py-24">
+      <section className="section">
         <div className="mx-auto max-w-5xl rounded-3xl border border-cyan-400/30 bg-cyan-400/10 p-8 text-center md:p-14">
           <h2 className="text-4xl font-bold md:text-5xl">
             Want marketing that brings better leads?

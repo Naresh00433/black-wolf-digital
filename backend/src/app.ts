@@ -10,6 +10,7 @@ import leadRoutes from "./routes/lead.routes";
 import dashboardRoutes from "./routes/dashboard.routes";
 import uploadRoutes from "./routes/upload.routes";
 import { errorHandler, notFound } from "./middlewares/error.middleware";
+import userRoutes from "./routes/user.routes";
 
 const app = express();
 
@@ -26,6 +27,7 @@ app.use("/api", serviceRoutes);
 app.use("/api", leadRoutes);
 app.use("/api", dashboardRoutes);
 app.use("/api", uploadRoutes);
+app.use("/api", userRoutes);
 
 app.use(notFound);
 app.use(errorHandler);

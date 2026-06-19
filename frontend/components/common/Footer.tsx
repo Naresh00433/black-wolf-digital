@@ -8,11 +8,11 @@ export default function Footer() {
         <div>
           <Link href="/" className="flex items-center gap-3">
             <Image
-              src="/images/black-wolf-digital-removebg-preview.png"
+              src="/images/black-wolf-digital.png"
               alt="Black Wolf Digital"
-              width={44}
-              height={44}
-              className="h-25 w-auto"
+              width={100}
+              height={100}
+              className="ms-5 w-auto"
               priority
             />
           </Link>
@@ -32,14 +32,14 @@ export default function Footer() {
             <Link href="/about" className="hover:text-cyan-400">
               About
             </Link>
-            <Link href="/services" className="hover:text-cyan-400">
-              Services
-            </Link>
             <Link href="/blog" className="hover:text-cyan-400">
               Blog
             </Link>
+            <Link href="/services" className="hover:text-cyan-400">
+              Services
+            </Link>
             <Link href="/contact" className="hover:text-cyan-400">
-              Contact
+              Contact Us
             </Link>
           </div>
         </div>
@@ -76,17 +76,17 @@ export default function Footer() {
 
               <div className="flex flex-col gap-1">
                 <a
-                  href="mailto:info@blackwolfdigital.com"
+                  href="mailto:info@blackwolfdigital.in"
                   className="hover:text-cyan-400"
                 >
-                  info@blackwolfdigital.com
+                  info@blackwolfdigital.in
                 </a>
 
                 <a
-                  href="mailto:support@blackwolfdigital.com"
+                  href="mailto:support@blackwolfdigital.in"
                   className="hover:text-cyan-400"
                 >
-                  support@blackwolfdigital.com
+                  support@blackwolfdigital.in
                 </a>
               </div>
             </div>
@@ -126,20 +126,20 @@ export default function Footer() {
             href="/privacy-policy"
             className="transition hover:text-cyan-400"
           >
-            Privacy Policy
+            Privacy Policy 
           </Link>
-
+          <span className="text-gray-400">|</span>
           <Link
             href="/terms-and-conditions"
             className="transition hover:text-cyan-400"
           >
             Terms & Conditions
           </Link>
-
+          <span className="text-gray-400">|</span>
           <Link href="/disclaimer" className="transition hover:text-cyan-400">
             Disclaimer
           </Link>
-
+          <span className="text-gray-400">|</span>
           <Link
             href="/refund-policy"
             className="transition hover:text-cyan-400"

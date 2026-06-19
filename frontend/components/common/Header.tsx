@@ -24,7 +24,7 @@ export default function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
         <Link href="/" onClick={closeMenu} className="flex items-center gap-3">
           <Image
-            src="/images/black-wolf-digital-removebg-preview.png"
+            src="/images/black-wolf-digital.png"
             alt="Black Wolf Digital"
             width={44}
             height={44}

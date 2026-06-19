@@ -111,7 +111,7 @@ export default function AboutPage() {
       </section>
 
       <section className="px-6 py-20">
-        <div className="mx-auto max-w-7xl">
+        <div className="container-custom">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
             Values
           </p>
@@ -139,7 +139,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-6 py-24">
+      <section className="section">
         <div className="mx-auto max-w-5xl rounded-3xl border border-cyan-400/30 bg-cyan-400/10 p-8 text-center md:p-14">
           <h2 className="text-4xl font-bold md:text-5xl">
             Want to build a stronger digital presence?

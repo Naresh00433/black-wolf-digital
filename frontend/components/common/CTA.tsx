@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-<section className="px-6 py-24">
+<section className="section">
   <div className="mx-auto max-w-5xl rounded-3xl border border-cyan-400/30 bg-cyan-400/10 p-8 text-center md:p-14">
     <h2 className="text-4xl font-bold md:text-5xl">
       Want marketing that brings better leads?

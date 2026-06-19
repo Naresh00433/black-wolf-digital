@@ -66,8 +66,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="px-6 py-24">
-        <div className="mx-auto max-w-7xl">
+      <section className="section">
+        <div className="container-custom">
           <div className="mb-10 flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <div>
               <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
@@ -113,7 +113,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="px-6 py-24">
+      <section className="section">
         <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-2 md:items-center">
           <div>
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
@@ -149,8 +149,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="px-6 py-24">
-        <div className="mx-auto max-w-7xl">
+      <section className="section">
+        <div className="container-custom">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
             Process
           </p>
@@ -179,7 +179,133 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="px-6 py-24">
+      <section className="section">
+        <div className="container-custom">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
+            Industries
+          </p>
+
+          <h2 className="mb-10 max-w-3xl text-4xl font-bold md:text-5xl">
+            Helping businesses across multiple industries grow online
+          </h2>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              "Healthcare",
+              "Real Estate",
+              "Education",
+              "Finance",
+              "E-Commerce",
+              "Technology",
+              "Local Businesses",
+              "Professional Services",
+            ].map((industry) => (
+              <div
+                key={industry}
+                className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center"
+              >
+                <h3 className="font-bold">{industry}</h3>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container-custom">
+          <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
+            Results
+          </p>
+
+          <h2 className="mb-10 max-w-3xl text-4xl font-bold md:text-5xl">
+            Focused on outcomes that help businesses grow
+          </h2>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {[
+              {
+                title: "More Qualified Leads",
+                desc: "Attract high-intent customers ready to engage with your business.",
+              },
+              {
+                title: "Higher Online Visibility",
+                desc: "Improve rankings, reach, and brand awareness across channels.",
+              },
+              {
+                title: "Better Conversion Rates",
+                desc: "Turn more visitors into customers through optimized experiences.",
+              },
+              {
+                title: "Scalable Growth",
+                desc: "Build systems that continue generating opportunities over time.",
+              },
+              {
+                title: "Stronger Brand Presence",
+                desc: "Create credibility and trust in competitive markets.",
+              },
+              {
+                title: "Data-Driven Decisions",
+                desc: "Use analytics and insights to improve performance consistently.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="rounded-2xl border border-white/10 bg-white/5 p-6"
+              >
+                <h3 className="text-xl font-bold">{item.title}</h3>
+                <p className="mt-3 text-gray-400 leading-7">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="mx-auto max-w-5xl">
+          <p className="mb-4 text-center text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
+            FAQs
+          </p>
+
+          <h2 className="mb-10 text-center text-4xl font-bold md:text-5xl">
+            Frequently Asked Questions
+          </h2>
+
+          <div className="space-y-5">
+            {[
+              {
+                q: "Do you work with small businesses?",
+                a: "Yes. We work with startups, local businesses, and growing brands looking to improve their digital presence.",
+              },
+              {
+                q: "Do you provide website development services?",
+                a: "Yes. We build websites using PHP, React, and Next.js depending on business requirements.",
+              },
+              {
+                q: "Can you help generate leads?",
+                a: "Absolutely. Lead generation is one of our core services through SEO, paid ads, and digital marketing campaigns.",
+              },
+              {
+                q: "Do you provide ongoing support?",
+                a: "Yes. We offer maintenance, optimization, and long-term growth support.",
+              },
+              {
+                q: "How do I get started?",
+                a: "Simply contact us through the website and we'll discuss your business goals and requirements.",
+              },
+            ].map((faq) => (
+              <div
+                key={faq.q}
+                className="rounded-2xl border border-white/10 bg-white/5 p-6"
+              >
+                <h3 className="text-lg font-bold">{faq.q}</h3>
+                <p className="mt-3 text-gray-400 leading-7">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
         <div className="mx-auto max-w-5xl rounded-3xl border border-cyan-400/30 bg-cyan-400/10 p-8 text-center md:p-14">
           <h2 className="text-4xl font-bold md:text-5xl">
             Ready to grow your business online?

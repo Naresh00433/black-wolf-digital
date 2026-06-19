@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
+import { AuthRequest } from "../middlewares/auth.middleware";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import prisma from "../config/prisma";
-import { AuthRequest } from "../middlewares/auth.middleware";
 
 export const login = async (req: Request, res: Response) => {
   try {
@@ -42,6 +42,15 @@ export const login = async (req: Request, res: Response) => {
     if (!jwtSecret) {
       throw new Error("JWT_SECRET is missing");
     }
+
+    await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        lastLoginAt: new Date(),
+      },
+    });
 
     const token = jwt.sign(
       {
@@ -93,7 +102,9 @@ export const getMe = async (req: AuthRequest, res: Response) => {
         name: true,
         email: true,
         role: true,
+        isActive: true,
         createdAt: true,
+        lastLoginAt: true,
       },
     });
 
@@ -112,6 +123,63 @@ export const getMe = async (req: AuthRequest, res: Response) => {
     res.status(500).json({
       success: false,
       message: "Something went wrong",
+      error,
+    });
+  }
+};
+
+export const changePassword = async (req: AuthRequest, res: Response) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+
+    if (!req.user) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized",
+      });
+    }
+
+    const user = await prisma.user.findUnique({
+      where: {
+        id: req.user.id,
+      },
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        message: "Current password is incorrect",
+      });
+    }
+
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    await prisma.user.update({
+      where: {
+        id: user.id,
+      },
+      data: {
+        password: hashedPassword,
+      },
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "Password updated successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to update password",
       error,
     });
   }
