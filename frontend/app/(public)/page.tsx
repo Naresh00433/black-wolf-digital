@@ -13,7 +13,7 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-24">
+      <section className="relative flex min-h-screen items-center justify-center overflow-hidden px-6 pt-30">
         <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-400/20 blur-3xl" />
         <div className="absolute bottom-20 right-10 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
 
@@ -48,7 +48,7 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          <div className="mx-auto mt-14 grid max-w-3xl gap-4 sm:grid-cols-3">
+          {/* <div className="mx-auto mt-14 grid max-w-3xl gap-4 sm:grid-cols-3">
             {[
               ["SEO", "Organic growth"],
               ["Paid Ads", "Fast acquisition"],
@@ -62,7 +62,7 @@ export default async function HomePage() {
                 <p className="mt-1 text-sm text-gray-400">{desc}</p>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       </section>
 
@@ -191,20 +191,58 @@ export default async function HomePage() {
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              "Healthcare",
-              "Real Estate",
-              "Education",
-              "Finance",
-              "E-Commerce",
-              "Technology",
-              "Local Businesses",
-              "Professional Services",
+              {
+                title: "Healthcare",
+                description:
+                  "Attract more patients and strengthen your healthcare brand online.",
+              },
+              {
+                title: "Real Estate",
+                description:
+                  "Generate high-quality property leads and increase market visibility.",
+              },
+              {
+                title: "Education",
+                description:
+                  "Reach prospective students with targeted digital marketing campaigns.",
+              },
+              {
+                title: "Finance",
+                description:
+                  "Build trust and acquire customers through strategic online marketing.",
+              },
+              {
+                title: "E-Commerce",
+                description:
+                  "Drive sales, engagement, and sustainable online business growth.",
+              },
+              {
+                title: "Technology",
+                description:
+                  "Accelerate growth with performance-driven digital marketing solutions.",
+              },
+              {
+                title: "Local Businesses",
+                description:
+                  "Connect with local customers and increase footfall and inquiries.",
+              },
+              {
+                title: "Professional Services",
+                description:
+                  "Generate qualified leads and establish industry authority online.",
+              },
             ].map((industry) => (
               <div
-                key={industry}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center"
+                key={industry.title}
+                className="rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:border-cyan-400/40 hover:bg-white/10"
               >
-                <h3 className="font-bold">{industry}</h3>
+                <h3 className="mb-3 text-lg font-bold text-white">
+                  {industry.title}
+                </h3>
+
+                <p className="text-sm leading-relaxed text-gray-400">
+                  {industry.description}
+                </p>
               </div>
             ))}
           </div>

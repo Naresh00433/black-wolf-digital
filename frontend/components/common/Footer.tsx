@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="relative overflow-hidden border-t border-white/10 bg-black px-6 py-10 text-white">
       <div className="relative z-10 mx-auto grid max-w-7xl gap-8 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Link href="/" className="flex items-center gap-3">
+          {/* <Link href="/" className="flex items-center gap-3">
             <Image
               src="/images/black-wolf-digital.png"
               alt="Black Wolf Digital"
@@ -15,7 +15,7 @@ export default function Footer() {
               className="ms-5 w-auto"
               priority
             />
-          </Link>
+          </Link> */}
           <p className="mt-3 max-w-sm text-sm leading-6 text-gray-400">
             Black Wolf Digital helps businesses generate qualified leads,
             increase online visibility, and accelerate growth through affiliate
