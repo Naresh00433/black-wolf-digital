@@ -18,7 +18,7 @@ export default async function ServicesPage() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <section className="relative overflow-hidden px-6 pb-20 pt-36">
+      <section className="relative overflow-hidden px-6 pt-36">
         <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-400/20 blur-3xl" />
         <div className="absolute bottom-0 right-10 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
 
@@ -39,7 +39,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      <section className="px-6 py-20">
+      <section className="section">
         <div className="container-custom">
           {data.services.length === 0 ? (
             <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
@@ -80,7 +80,7 @@ export default async function ServicesPage() {
         </div>
       </section>
 
-      <section className="px-6 py-20">
+      <section className="section">
         <div className="mx-auto grid max-w-7xl gap-10 rounded-3xl border border-white/10 bg-white/5 p-8 md:grid-cols-2 md:p-12">
           <div>
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">

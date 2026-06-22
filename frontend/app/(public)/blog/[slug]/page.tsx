@@ -56,11 +56,11 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   return (
     <main className="min-h-screen bg-black text-white">
       <article>
-        <section className="relative overflow-hidden px-6 pb-16 pt-36">
+        <section className="relative overflow-hidden px-6 pt-36">
           <div className="absolute left-10 top-28 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
           <div className="absolute bottom-0 right-10 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
 
-          <div className="relative z-10 mx-auto max-w-5xl">
+          <div className="relative z-10 mx-auto max-w-7xl">
             <Link
               href="/blog"
               className="mb-8 inline-block text-sm font-semibold text-cyan-400 hover:text-cyan-300"
@@ -94,8 +94,8 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           </div>
         </section>
 
-        <section className="px-6 pb-20">
-          <div className="mx-auto max-w-6xl">
+        <section className="section">
+          <div className="mx-auto max-w-7xl">
             <div className="relative h-[320px] overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 md:h-[480px]">
               {blog.featuredImage ? (
                 <img
@@ -114,7 +114,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           </div>
         </section>
 
-        <section className="px-6 py-10">
+        <section className="section">
           <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.75fr_0.25fr]">
             <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-10">
               <div className="whitespace-pre-line text-lg leading-9 text-gray-300">

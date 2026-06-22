@@ -9,7 +9,7 @@ export const metadata = {
 export default function ContactPage() {
   return (
     <main className="min-h-screen bg-black text-white">
-      <section className="relative overflow-hidden px-6 pb-16 pt-36">
+      <section className="relative overflow-hidden pt-36">
         <div className="absolute left-10 top-28 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
         <div className="absolute bottom-0 right-10 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
 
@@ -30,7 +30,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="px-6 py-20">
+      <section className="section">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.1fr_0.9fr]">
           <ContactForm />
 
@@ -69,7 +69,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="px-6 pb-24">
+      <section className="section">
         <div className="mx-auto grid max-w-7xl gap-5 md:grid-cols-3">
           {[
             ["Response", "We’ll review your enquiry and respond soon."],

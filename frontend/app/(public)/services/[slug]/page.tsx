@@ -66,11 +66,11 @@ export default async function ServiceDetailPage({
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <section className="relative overflow-hidden px-6 pb-20 pt-36">
+      <section className="relative overflow-hidden pt-36">
         <div className="absolute left-10 top-28 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
         <div className="absolute bottom-0 right-10 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
 
-        <div className="relative z-10 mx-auto max-w-6xl">
+        <div className="relative z-10 mx-auto max-w-7xl">
           <Link
             href="/services"
             className="mb-8 inline-block text-sm font-semibold text-cyan-400 hover:text-cyan-300"
@@ -94,7 +94,7 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      <section className="px-6 py-20">
+      <section className="section">
         <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1.3fr_0.7fr]">
           <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-10">
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
@@ -123,7 +123,7 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      <section className="px-6 py-20">
+      <section className="section">
         <div className="container-custom">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
             Benefits
@@ -146,7 +146,7 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      <section className="px-6 py-20">
+      <section className="section">
         <div className="container-custom">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
             Process

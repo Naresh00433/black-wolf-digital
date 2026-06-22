@@ -9,7 +9,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-black text-white">
-      <section className="relative overflow-hidden px-6 pb-24 pt-36">
+      <section className="relative overflow-hidden px-6 pt-36">
         <div className="absolute left-10 top-32 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
         <div className="absolute bottom-10 right-10 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
 
@@ -30,7 +30,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-6 py-20">
+      <section className="section">
         <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-2 md:items-center">
           <div className="rounded-3xl border border-white/10 bg-white/5 p-8 md:p-10">
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
@@ -77,7 +77,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-6 py-20">
+      <section className="section">
         <div className="mx-auto grid max-w-7xl gap-6 md:grid-cols-2">
           <div className="rounded-3xl border border-cyan-400/30 bg-cyan-400/10 p-8 md:p-10">
             <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
@@ -110,7 +110,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="px-6 py-20">
+      <section className="section">
         <div className="container-custom">
           <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
             Values
