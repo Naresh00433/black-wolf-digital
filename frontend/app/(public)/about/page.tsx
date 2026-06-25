@@ -9,7 +9,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen bg-black text-white">
-      <section className="relative overflow-hidden px-6 pt-36">
+      <section className="relative overflow-hidden px-6 pt-50">
         <div className="absolute left-10 top-32 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
         <div className="absolute bottom-10 right-10 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
 

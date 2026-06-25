@@ -66,8 +66,8 @@ export default function Footer() {
           <div className="space-y-4 text-sm text-gray-400">
             <div>
               <p className="font-medium text-white">Phone</p>
-              <a href="tel:+918984129745" className="hover:text-cyan-400">
-                +91 89841 29745
+              <a href="tel:+919518000433" className="hover:text-cyan-400">
+                +91 9518000433
               </a>
             </div>
 
@@ -76,17 +76,10 @@ export default function Footer() {
 
               <div className="flex flex-col gap-1">
                 <a
-                  href="mailto:info@blackwolfdigital.in"
+                  href="mailto:sam@blackwolfdigital.in"
                   className="hover:text-cyan-400"
                 >
-                  info@blackwolfdigital.in
-                </a>
-
-                <a
-                  href="mailto:support@blackwolfdigital.in"
-                  className="hover:text-cyan-400"
-                >
-                  support@blackwolfdigital.in
+                  sam@blackwolfdigital.in
                 </a>
               </div>
             </div>
@@ -95,11 +88,11 @@ export default function Footer() {
               <p className="font-medium text-white">Address</p>
 
               <p className="leading-6">
-                DLF Cyber City Idco Info Park,
+                1st Street on Bahalba RoadNear Tayal Trading Company
                 <br />
-                Technology Corridor, Patia,
+                Kishangarh, Maham
                 <br />
-                Bhubaneswar, Odisha 751024
+                Rohtak Division, Haryana 124112
               </p>
             </div>
           </div>

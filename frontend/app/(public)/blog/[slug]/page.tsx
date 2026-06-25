@@ -56,7 +56,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
   return (
     <main className="min-h-screen bg-black text-white">
       <article>
-        <section className="relative overflow-hidden px-6 pt-36">
+        <section className="relative overflow-hidden px-6 pt-50">
           <div className="absolute left-10 top-28 h-72 w-72 rounded-full bg-cyan-400/20 blur-3xl" />
           <div className="absolute bottom-0 right-10 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
 

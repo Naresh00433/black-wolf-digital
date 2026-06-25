@@ -20,15 +20,15 @@ export default function Header() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-black/80 backdrop-blur-xl">
+    <header className="fixed left-0 top-0 z-50 w-full backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
         <Link href="/" onClick={closeMenu} className="flex items-center gap-3">
           <Image
-            src="/images/black-wolf-digital.png"
+            src="/images/black-wolf-digital-logo.png"
             alt="Black Wolf Digital"
-            width={44}
-            height={44}
-            className="h-25 w-auto"
+            width={2016}
+            height={2120}
+            className="h-35 w-35"
             priority
           />
           {/* <span className="text-lg font-bold tracking-wide text-white">
