@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import WhatsappButton from "@/components/common/WhatsappButton";
+import WolfAssistant from "@/components/ai/WolfAssistant";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -65,6 +66,7 @@ export default function RootLayout({
       <body className={`${inter.className} min-h-screen bg-black text-white`}>
         {children}
         <WhatsappButton />
+        <WolfAssistant />
       </body>
     </html>
   );
