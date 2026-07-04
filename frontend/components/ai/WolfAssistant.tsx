@@ -5,13 +5,17 @@ import WolfButton from "./WolfButton";
 import WolfChat from "./WolfChat";
 
 export default function WolfAssistant() {
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
-      <WolfButton onClick={() => setOpen(!open)} />
+      {!isOpen && (
+        <WolfButton onClick={() => setIsOpen(true)} />
+      )}
 
-      {open && <WolfChat />}
+      {isOpen && (
+        <WolfChat onClose={() => setIsOpen(false)} />
+      )}
     </>
   );
 }

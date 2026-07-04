@@ -18,7 +18,11 @@ interface Message {
   message: string;
 }
 
-export default function WolfChat() {
+interface WolfChatProps {
+  onClose: () => void;
+}
+
+export default function WolfChat({ onClose }: WolfChatProps) {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
@@ -182,7 +186,13 @@ export default function WolfChat() {
           </div>
         </div>
 
-        <button className="rounded-lg p-2 hover:bg-white/10">✕</button>
+        <button
+          onClick={onClose}
+          className="rounded-lg p-2 transition hover:bg-white/10"
+          aria-label="Close Chat"
+        >
+          ✕
+        </button>
       </div>
 
       <div className="flex-1 space-y-4 overflow-y-auto p-5">

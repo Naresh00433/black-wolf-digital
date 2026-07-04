@@ -13,7 +13,7 @@ export default async function HomePage() {
 
   return (
     <main className="min-h-screen bg-black text-white">
-      <section className="relative flex min-h-svh items-center justify-center overflow-hidden px-6">
+      <section className="relative flex min-h-svh items-center justify-center overflow-hidden px-6 pt-30">
         <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 rounded-full bg-cyan-400/20 blur-3xl" />
         <div className="absolute bottom-20 right-10 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
 
