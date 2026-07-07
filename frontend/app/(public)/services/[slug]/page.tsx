@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { apiFetch } from "@/lib/api";
 import { Service } from "@/types/service";
+import CTA from "@/components/common/CTA";
 
 interface ServiceResponse {
   success: boolean;
@@ -171,25 +172,7 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      <section className="section">
-        <div className="mx-auto max-w-5xl rounded-3xl border border-cyan-400/30 bg-cyan-400/10 p-8 text-center md:p-14">
-          <h2 className="text-4xl font-bold md:text-5xl">
-            Ready to use {service.title} for growth?
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-gray-300">
-            Share your goals with us and we’ll help you understand the best next
-            step.
-          </p>
-
-          <Link
-            href="/contact"
-            className="mt-8 inline-block rounded-full bg-cyan-400 px-8 py-4 font-semibold text-black transition hover:bg-cyan-300"
-          >
-            Start the Conversation
-          </Link>
-        </div>
-      </section>
+      <CTA />
     </main>
   );
 }

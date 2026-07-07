@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { apiFetch } from "@/lib/api";
 import { Blog } from "@/types/blog";
+import CTA from "@/components/common/CTA";
 
 interface BlogResponse {
   success: boolean;
@@ -164,25 +165,7 @@ export default async function BlogDetailPage({ params }: BlogDetailPageProps) {
           </div>
         </section>
 
-        <section className="section">
-          <div className="mx-auto max-w-5xl rounded-3xl border border-cyan-400/30 bg-cyan-400/10 p-8 text-center md:p-14">
-            <h2 className="text-4xl font-bold md:text-5xl">
-              Want to turn insights into growth?
-            </h2>
-
-            <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-gray-300">
-              Black Wolf Digital can help you build a practical marketing system
-              for visibility, leads, and conversions.
-            </p>
-
-            <Link
-              href="/contact"
-              className="mt-8 inline-block rounded-full bg-cyan-400 px-8 py-4 font-semibold text-black transition hover:bg-cyan-300"
-            >
-              Get Free Strategy Call
-            </Link>
-          </div>
-        </section>
+        <CTA />
       </article>
     </main>
   );

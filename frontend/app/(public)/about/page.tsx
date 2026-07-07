@@ -1,4 +1,5 @@
 import Link from "next/link";
+import CTA from "@/components/common/CTA";
 
 export const metadata = {
   title: "About | Black Wolf Digital",
@@ -139,25 +140,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="mx-auto max-w-5xl rounded-3xl border border-cyan-400/30 bg-cyan-400/10 p-8 text-center md:p-14">
-          <h2 className="text-4xl font-bold md:text-5xl">
-            Want to build a stronger digital presence?
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-gray-300">
-            Let’s discuss your business goals and create a growth plan that fits
-            your market, budget, and audience.
-          </p>
-
-          <Link
-            href="/contact"
-            className="mt-8 inline-block rounded-full bg-cyan-400 px-8 py-4 font-semibold text-black transition hover:bg-cyan-300"
-          >
-            Talk to Us
-          </Link>
-        </div>
-      </section>
+      <CTA />
     </main>
   );
 }

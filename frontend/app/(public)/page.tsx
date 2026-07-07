@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { apiFetch } from "@/lib/api";
 import { Service } from "@/types/service";
+import CTA from "@/components/common/CTA";
+import FAQ from "@/components/common/FAQ";
 
 interface ServicesResponse {
   success: boolean;
@@ -65,6 +67,7 @@ export default async function HomePage() {
           </div> */}
         </div>
       </section>
+
 
       <section className="section">
         <div className="container-custom">
@@ -298,52 +301,11 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="section">
-        <div className="mx-auto max-w-5xl">
-          <p className="mb-4 text-center text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
-            FAQs
-          </p>
+      <FAQ />
 
-          <h2 className="mb-10 text-center text-4xl font-bold md:text-5xl">
-            Frequently Asked Questions
-          </h2>
+      <CTA />
 
-          <div className="space-y-5">
-            {[
-              {
-                q: "Do you work with small businesses?",
-                a: "Yes. We work with startups, local businesses, and growing brands looking to improve their digital presence.",
-              },
-              {
-                q: "Do you provide website development services?",
-                a: "Yes. We build websites using PHP, React, and Next.js depending on business requirements.",
-              },
-              {
-                q: "Can you help generate leads?",
-                a: "Absolutely. Lead generation is one of our core services through SEO, paid ads, and digital marketing campaigns.",
-              },
-              {
-                q: "Do you provide ongoing support?",
-                a: "Yes. We offer maintenance, optimization, and long-term growth support.",
-              },
-              {
-                q: "How do I get started?",
-                a: "Simply contact us through the website and we'll discuss your business goals and requirements.",
-              },
-            ].map((faq) => (
-              <div
-                key={faq.q}
-                className="rounded-2xl border border-white/10 bg-white/5 p-6"
-              >
-                <h3 className="text-lg font-bold">{faq.q}</h3>
-                <p className="mt-3 text-gray-400 leading-7">{faq.a}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section">
+      {/* <section className="section">
         <div className="mx-auto max-w-5xl rounded-3xl border border-cyan-400/30 bg-cyan-400/10 p-8 text-center md:p-14">
           <h2 className="text-4xl font-bold md:text-5xl">
             Ready to grow your business online?
@@ -361,7 +323,7 @@ export default async function HomePage() {
             Start Your Growth Plan
           </Link>
         </div>
-      </section>
+      </section> */}
     </main>
   );
 }

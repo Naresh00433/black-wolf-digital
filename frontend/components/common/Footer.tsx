@@ -1,9 +1,69 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { subscribeNewsletter } from "@/services/newsletter";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [message, setMessage] = useState("");
+
+  const handleSubscribe = async () => {
+    if (!email.trim()) {
+      setMessage("Please enter your email.");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const res = await subscribeNewsletter(email);
+
+      setMessage(res.message);
+      setEmail("");
+    } catch (error) {
+      setMessage("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <footer className="relative overflow-hidden border-t border-white/10 bg-black px-6 py-10 text-white">
+      <div className="mx-auto mb-10 max-w-7xl overflow-hidden">
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div>
+            <p className="mb-2 text-sm font-semibold uppercase tracking-[0.3em] text-cyan-400">
+              Newsletter
+            </p>
+
+            <h2 className="mb-4 text-4xl font-bold">Join the Wolf Pack</h2>
+          </div>
+
+          <div>
+            <div className="flex overflow-hidden rounded-xl border border-white/10 bg-white/5">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="flex-1 bg-transparent px-5 py-4 text-white outline-none placeholder:text-gray-500"
+              />
+
+              <button
+                onClick={handleSubscribe}
+                disabled={loading}
+                className="bg-cyan-400 px-8 font-semibold text-black transition hover:bg-cyan-300 disabled:opacity-60"
+              >
+                {loading ? "..." : "Subscribe"}
+              </button>
+            </div>
+
+            {message && <p className="mt-4 text-sm text-cyan-400">{message}</p>}
+          </div>
+        </div>
+      </div>
       <div className="relative z-10 mx-auto grid max-w-7xl gap-8 md:grid-cols-2 lg:grid-cols-4">
         <div>
           {/* <Link href="/" className="flex items-center gap-3">
@@ -30,16 +90,16 @@ export default function Footer() {
           </h3>
           <div className="flex flex-col gap-2 text-sm text-gray-400">
             <Link href="/about" className="hover:text-cyan-400">
-              About
+              Who We Are
             </Link>
             <Link href="/blog" className="hover:text-cyan-400">
-              Blog
+              Insights
             </Link>
             <Link href="/services" className="hover:text-cyan-400">
-              Services
+              What We Do
             </Link>
             <Link href="/contact" className="hover:text-cyan-400">
-              Contact Us
+              Let's Talk
             </Link>
           </div>
         </div>
@@ -119,7 +179,7 @@ export default function Footer() {
             href="/privacy-policy"
             className="transition hover:text-cyan-400"
           >
-            Privacy Policy 
+            Privacy Policy
           </Link>
           <span className="text-gray-400">|</span>
           <Link

@@ -7,10 +7,10 @@ import { useState } from "react";
 
 const navLinks = [
   { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Services", href: "/services" },
-  { label: "Blog", href: "/blog" },
-  { label: "Contact", href: "/contact" },
+  { label: "Who We Are", href: "/about" },
+  { label: "What We Do", href: "/services" },
+  { label: "Insights", href: "/blog" },
+  { label: "Let's Talk", href: "/contact" },
 ];
 
 export default function Header() {

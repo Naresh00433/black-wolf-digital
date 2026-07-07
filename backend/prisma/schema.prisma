@@ -62,3 +62,11 @@ model Lead {
   status    String   @default("new")
   createdAt DateTime @default(now())
 }
+
+model Newsletter {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  isActive  Boolean  @default(true)
+  source    String?  @default("Website Footer")
+  createdAt DateTime @default(now())
+}
