@@ -65,7 +65,7 @@ export default function CursorTrail() {
 
         ctx.strokeStyle = `hsla(${p1.hue},100%,60%,${p1.life})`;
 
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 5;
 
         ctx.shadowBlur = 20;
 

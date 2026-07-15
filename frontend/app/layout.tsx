@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import WhatsappButton from "@/components/common/WhatsappButton";
 import WolfAssistant from "@/components/ai/WolfAssistant";
 import "./globals.css";
-import CursorTrail from "@/components/effects/CursorTrail";
+// import CursorTrail from "@/components/effects/CursorTrail";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://blackwolfdigital.in"),
@@ -68,7 +68,7 @@ export default function RootLayout({
         {children}
         <WhatsappButton />
         <WolfAssistant />
-        <CursorTrail />
+        {/* <CursorTrail /> */}
       </body>
     </html>
   );

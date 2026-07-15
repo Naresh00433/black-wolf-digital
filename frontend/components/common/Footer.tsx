@@ -99,7 +99,7 @@ export default function Footer() {
               What We Do
             </Link>
             <Link href="/contact" className="hover:text-cyan-400">
-              Let's Talk
+              Lets Talk
             </Link>
           </div>
         </div>
@@ -136,10 +136,10 @@ export default function Footer() {
 
               <div className="flex flex-col gap-1">
                 <a
-                  href="mailto:sam@blackwolfdigital.in"
+                  href="mailto:support@blackwolfdigital.in"
                   className="hover:text-cyan-400"
                 >
-                  sam@blackwolfdigital.in
+                  support@blackwolfdigital.in
                 </a>
               </div>
             </div>
